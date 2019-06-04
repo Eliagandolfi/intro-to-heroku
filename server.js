@@ -42,13 +42,13 @@ client.query('SELECT * FROM salesforce.Zone__c', function(error, data) {
 });
 
 
-app.get('/property', function(req, res) {
+app.get('/Village__c', function(req, res) {
   client.query('SELECT * FROM ' + propertyTable, function(error, data) {
     res.json(data.rows);
   });
 });
 
-app.get('/property/:id', function(req, res) {
+app.get('/Village__c/:id', function(req, res) {
   client.query('SELECT ' + propertyTable + '.*, ' + brokerTable + '.sfid AS Zone__c_sfid, ' + brokerTable + '.name AS Zone__c_name, ' + brokerTable + '.Zone_Code__c AS Zone__c_Zone_Code__c, ' + brokerTable + '.This_Season_Model__c AS Zone__c_This_Season_Model__c, ' + brokerTable + '.Country__c AS Zone__c_Country__c, ' + brokerTable + '.Zone__c = ' + brokerTable + '.sfid WHERE ' + propertyTable + '.sfid = $1', [req.params.id], function(error, data) {
     res.json(data.rows[0]);
   });
@@ -74,13 +74,13 @@ app.delete('/favorite/:sfid', function(req, res) {
 });
 
 
-app.get('/broker', function(req, res) {
+app.get('/Zone__c', function(req, res) {
   client.query('SELECT * FROM ' + brokerTable, function(error, data) {
     res.json(data.rows);
   });
 });
 
-app.get('/broker/:sfid', function(req, res) {
+app.get('/Zone__c/:sfid', function(req, res) {
   client.query('SELECT * FROM ' + brokerTable + ' WHERE sfid = $1', [req.params.sfid], function(error, data) {
     res.json(data.rows[0]);
   });
