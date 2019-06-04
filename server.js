@@ -49,7 +49,7 @@ app.get('/property', function(req, res) {
 });
 
 app.get('/property/:id', function(req, res) {
-  client.query('SELECT ' + propertyTable + '.*, ' + brokerTable + '.sfid AS Zone__c_sfid, ' + brokerTable + '.name AS Zone__c_name, ' + brokerTable + '.Zone_Code__c AS Zone__c_Zone_Code__c, ' + brokerTable + '.Active_Villages__c AS Zone__c_Active_Villages__c, ' + brokerTable + '.Country__c AS Zone__c_Country__c, ' + brokerTable + '.Zone__c = ' + brokerTable + '.sfid WHERE ' + propertyTable + '.sfid = $1', [req.params.id], function(error, data) {
+  client.query('SELECT ' + propertyTable + '.*, ' + brokerTable + '.sfid AS Zone__c_sfid, ' + brokerTable + '.name AS Zone__c_name, ' + brokerTable + '.Zone_Code__c AS Zone__c_Zone_Code__c, ' + brokerTable + '.This_Season_Model__c AS Zone__c_This_Season_Model__c, ' + brokerTable + '.Country__c AS Zone__c_Country__c, ' + brokerTable + '.Zone__c = ' + brokerTable + '.sfid WHERE ' + propertyTable + '.sfid = $1', [req.params.id], function(error, data) {
     res.json(data.rows[0]);
   });
 });
