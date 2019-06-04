@@ -1,11 +1,11 @@
-import {Injectable} from '@angular/core';
+/* import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import 'rxjs/Rx';
 
 /*
  Prettify objects returned from Salesforce. This is optional, but it allows us to keep the templates independent
  from the Salesforce specific naming convention. This could also be done Salesforce-side by creating a custom REST service.
- */
+ */ /*
 let prettifyBroker = (broker) => {
     return {
         id: broker.sfid,
@@ -37,4 +37,4 @@ export class BrokerService {
         return this.http.get('/broker/' + id).map(response => prettifyBroker(response.json()));
     }
 
-}
+} */

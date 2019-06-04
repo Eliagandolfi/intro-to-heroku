@@ -20,14 +20,12 @@ if (process.env.DATABASE_URL !== undefined) {
 var client = new pg.Client(connectionString);
 client.connect();
 
-var propertyTable = 'property__c';
-var favoriteTable = 'favorite__c';
-var brokerTable = 'broker__c';
+var propertyTable = 'Village__c';
 
 // setup the demo data if needed
-client.query('SELECT * FROM salesforce.broker__c', function(error, data) {
+client.query('SELECT * FROM salesforce.Zone__c', function(error, data) {
   if (error !== null) {
-    client.query('SELECT * FROM broker__c', function(error, data) {
+    client.query('SELECT * FROM Zone__c', function(error, data) {
       if (error !== null) {
         console.log('Loading Demo Data...');
         require('./db/demo.js')(client);
@@ -37,9 +35,9 @@ client.query('SELECT * FROM salesforce.broker__c', function(error, data) {
   }
   else {
     var schema = 'salesforce.';
-    propertyTable = schema + 'property__c';
+    propertyTable = schema + 'Village__c';
     favoriteTable = schema + 'favorite__c';
-    brokerTable = schema + 'broker__c';
+    brokerTable = schema + 'Zone__c';
   }
 });
 
@@ -51,20 +49,20 @@ app.get('/property', function(req, res) {
 });
 
 app.get('/property/:id', function(req, res) {
-  client.query('SELECT ' + propertyTable + '.*, ' + brokerTable + '.sfid AS broker__c_sfid, ' + brokerTable + '.name AS broker__c_name, ' + brokerTable + '.email__c AS broker__c_email__c, ' + brokerTable + '.phone__c AS broker__c_phone__c, ' + brokerTable + '.mobile_phone__c AS broker__c_mobile_phone__c, ' + brokerTable + '.title__c AS broker__c_title__c, ' + brokerTable + '.picture__c AS broker__c_picture__c FROM ' + propertyTable + ' INNER JOIN ' + brokerTable + ' ON ' + propertyTable + '.broker__c = ' + brokerTable + '.sfid WHERE ' + propertyTable + '.sfid = $1', [req.params.id], function(error, data) {
+  client.query('SELECT ' + propertyTable + '.*, ' + brokerTable + '.sfid AS Zone__c_sfid, ' + brokerTable + '.name AS Zone__c_name, ' + brokerTable + '.Zone_Code__c AS Zone__c_Zone_Code__c, ' + brokerTable + '.Active_Villages__c AS Zone__c_Active_Villages__c, ' + brokerTable + '.Country__c AS Zone__c_Country__c, ' + brokerTable + '.Zone__c = ' + brokerTable + '.sfid WHERE ' + propertyTable + '.sfid = $1', [req.params.id], function(error, data) {
     res.json(data.rows[0]);
   });
 });
 
 
 app.get('/favorite', function(req, res) {
-  client.query('SELECT ' + propertyTable + '.*, ' + favoriteTable + '.sfid AS favorite__c_sfid FROM ' + propertyTable + ', ' + favoriteTable + ' WHERE ' + propertyTable + '.sfid = ' + favoriteTable + '.property__c', function(error, data) {
+  client.query('SELECT ' + propertyTable + '.*, ' + favoriteTable + '.sfid AS favorite__c_sfid FROM ' + propertyTable + ', ' + favoriteTable + ' WHERE ' + propertyTable + '.sfid = ' + favoriteTable + '.Village__c', function(error, data) {
     res.json(data.rows);
   });
 });
 
 app.post('/favorite', function(req, res) {
-  client.query('INSERT INTO ' + favoriteTable + ' (property__c) VALUES ($1)', [req.body.property__c], function(error, data) {
+  client.query('INSERT INTO ' + favoriteTable + ' (Village__c) VALUES ($1)', [req.body.Village__c], function(error, data) {
     res.json(data);
   });
 });

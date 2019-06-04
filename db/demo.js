@@ -1,4 +1,4 @@
-module.exports = function(client) {
+/* module.exports = function(client) {
 
   client.query(`CREATE TABLE broker__c (
    id SERIAL NOT NULL,
@@ -62,4 +62,4 @@ module.exports = function(client) {
 
   client.query(`INSERT INTO favorite__c (property__c, sfid) VALUES ('a0236000002NHKoAAO', 'a0136000003SsewAAC');`);
 
-};
+}; */
